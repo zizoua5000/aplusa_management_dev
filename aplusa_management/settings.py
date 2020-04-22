@@ -114,15 +114,17 @@ WSGI_APPLICATION = 'aplusa_management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-filename = os.path.join(os.path.dirname(__file__), os.path.dirname(__file__).split("/")[-2]+"_configurations","db_name.txt")
-db_name = open(filename).readlines()[0]
+# filename = os.path.join(os.path.dirname(__file__), os.path.dirname(__file__).split("/")[-2]+"_configurations","db_name.txt")
+# db_name = open(filename).readlines()[0]
+db_name="aplusa_management_dev"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": db_name,
         "USER": "postgres",
-        "PASSWORD": "VWw+$3!se5}%w68fZ2eX",
-        "HOST": "localhost",
+        "PASSWORD": "zVWw3!se5wxPr68fZ2eX",
+        "HOST": "81.21.82.180",
+        'PORT': '5433',
     }
 }
 
