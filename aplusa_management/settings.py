@@ -171,4 +171,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL='/'
 
-CORS_ORIGIN_WHITELIST=['http://192.168.20.142:3000', 'http://localhost:3000'],
+CORS_ORIGIN_WHITELIST=['http://192.168.20.142:3000', 'http://localhost:3000']
