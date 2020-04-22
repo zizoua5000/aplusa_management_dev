@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from datetime import timedelta
+from . import our_secrets
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -119,15 +120,14 @@ REST_FRAMEWORK = {
 
 # filename = os.path.join(os.path.dirname(__file__), os.path.dirname(__file__).split("/")[-2]+"_configurations","db_name.txt")
 # db_name = open(filename).readlines()[0]
-db_name="aplusa_management_dev"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": db_name,
-        "USER": "postgres",
-        "PASSWORD": "zVWw3!se5wxPr68fZ2eX",
-        "HOST": "81.21.82.180",
-        'PORT': '5433',
+        "NAME": our_secrets.db_name,
+        "USER": our_secrets.db_user,
+        "PASSWORD": our_secrets.db_pass,
+        "HOST": our_secrets.db_address,
+        'PORT': our_secrets.db_port,
     }
 }
 
