@@ -110,7 +110,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'aplusa_management.wsgi.application'
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS':    
+         'aplusa_management.pagination.CustomPagination'
+}
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
