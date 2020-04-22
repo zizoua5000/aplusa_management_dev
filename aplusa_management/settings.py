@@ -27,7 +27,7 @@ SECRET_KEY = '+*=#fk6hal!1g=97b%(2obmvq&&9l-h4rprwsq#1g5()hodm@j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.20.142']
+ALLOWED_HOSTS = ['192.168.20.142', "localhost", "127.0.0.1"]
 
 # REST_FRAMEWORK={
 #     'DEFAULT_AUTHENTICATION_CLASSES':[
@@ -171,4 +171,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL='/'
 
-CORS_ORIGIN_WHITELIST='http://192.168.20.142:3000',
+CORS_ORIGIN_WHITELIST=['http://192.168.20.142:3000', 'http://localhost:3000'],
