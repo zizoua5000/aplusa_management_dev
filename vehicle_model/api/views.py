@@ -6,11 +6,13 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAdminUser
 )
+# from aplusa_management.pagination import CustomPagination
 
 class VehicleModelListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
     queryset=VehicleModel.objects.all()
     serializer_class=VehicleModelSerializer
+    
     # permission_classes=[IsAuthenticated]
 
 class VehicleModelUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
