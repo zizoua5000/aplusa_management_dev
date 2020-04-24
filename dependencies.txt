@@ -5,3 +5,4 @@ djangorestframework-simplejwt
 django-filter
 Markdown
 Pillow
+django-cors-headers
