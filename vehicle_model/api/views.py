@@ -10,7 +10,7 @@ from rest_framework.permissions import (
 
 class VehicleModelListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
-    queryset=VehicleModel.objects.all()
+    queryset=VehicleModel.objects.all().order_by('id')
     serializer_class=VehicleModelSerializer
     
     # permission_classes=[IsAuthenticated]
