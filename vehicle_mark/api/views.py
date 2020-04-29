@@ -9,12 +9,12 @@ from rest_framework.permissions import (
 
 class VehicleMarkListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
-    queryset=VehicleMark.objects.all()
+    queryset=VehicleMark.objects.all().order_by('id')
     serializer_class=VehicleMarkSerializer
     # permission_classes=[IsAuthenticated]
 
 class VehicleMarkUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
-    queryset=VehicleMark.objects.all()
+    queryset=VehicleMark.objects.all().order_by('id')
     serializer_class=VehicleMarkSerializer
     # permission_classes=[IsAuthenticated]
