@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from datetime import timedelta
+from . import our_secrets
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +27,7 @@ SECRET_KEY = '+*=#fk6hal!1g=97b%(2obmvq&&9l-h4rprwsq#1g5()hodm@j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.20.142']
+ALLOWED_HOSTS = ['192.168.20.142', "localhost", "127.0.0.1"]
 
 # REST_FRAMEWORK={
 #     'DEFAULT_AUTHENTICATION_CLASSES':[
@@ -117,15 +118,16 @@ REST_FRAMEWORK = {
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-filename = os.path.join(os.path.dirname(__file__), os.path.dirname(__file__).split("/")[-2]+"_configurations","db_name.txt")
-db_name = open(filename).readlines()[0]
+# filename = os.path.join(os.path.dirname(__file__), os.path.dirname(__file__).split("/")[-2]+"_configurations","db_name.txt")
+# db_name = open(filename).readlines()[0]
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": db_name,
-        "USER": "postgres",
-        "PASSWORD": "VWw+$3!se5}%w68fZ2eX",
-        "HOST": "localhost",
+        "NAME": our_secrets.db_name,
+        "USER": our_secrets.db_user,
+        "PASSWORD": our_secrets.db_pass,
+        "HOST": our_secrets.db_address,
+        'PORT': our_secrets.db_port,
     }
 }
 
@@ -168,5 +170,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL='/'
+
 
 CORS_ORIGIN_WHITELIST=['http://192.168.20.142:3000','http://localhost:3000']

@@ -1,0 +1,8 @@
+django
+djangorestframework
+psycopg2
+djangorestframework-simplejwt
+django-filter
+Markdown
+Pillow
+django-cors-headers
