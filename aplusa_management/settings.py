@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    'django_filters',
     'corsheaders',
     'vehicle_type',
     'vehicle_mark',
@@ -113,7 +114,8 @@ WSGI_APPLICATION = 'aplusa_management.wsgi.application'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':    
-         'aplusa_management.pagination.CustomPagination'
+         'aplusa_management.pagination.CustomPagination',
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

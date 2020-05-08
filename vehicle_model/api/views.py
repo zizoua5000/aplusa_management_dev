@@ -9,13 +9,14 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAdminUser
 )
+from aplusa_management.filters import VehicleModelFilter
 
 class VehicleModelListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
     queryset=VehicleModel.objects.all().order_by('id')
     serializer_class=VehicleModelSerializer
-    
-    # permission_classes=[IsAuthenticated]
+    filter_class = VehicleModelFilter
+
 
 class VehicleModelUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
