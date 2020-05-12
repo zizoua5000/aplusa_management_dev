@@ -10,12 +10,20 @@ from rest_framework.permissions import (
     IsAdminUser
 )
 from aplusa_management.filters import VehicleModelFilter
+from rest_framework import filters
+import django_filters
+
 
 class VehicleModelListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
     queryset=VehicleModel.objects.all().order_by('id')
     serializer_class=VehicleModelSerializer
     filter_class = VehicleModelFilter
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend, filters.OrderingFilter)
+    ordering_fields = '__all__'
+   
+    
+    
 
 
 class VehicleModelUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
