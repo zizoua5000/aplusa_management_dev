@@ -22,7 +22,7 @@ class VehicleSerializer(ModelSerializer):
                 ]
 
         def get_vehicle_model_detail(self,obj):
-            return VehicleModelSerializer(obj.vehicle_model).data
+            return VehicleModelSerializer(obj.vehicle_model).data           
         def get_vehicle_type_detail(self,obj):
             return VehicleTypeSerializer(obj.vehicle_type).data
 
