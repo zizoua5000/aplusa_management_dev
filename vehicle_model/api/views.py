@@ -21,10 +21,7 @@ class VehicleModelListCreateAPIView(ListCreateAPIView):
     filter_class = VehicleModelFilter
     filter_backends = (filter.DjangoFilterBackend, filters.OrderingFilter)
     ordering_fields = '__all__'
-   
     
-    
-
 
 class VehicleModelUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
