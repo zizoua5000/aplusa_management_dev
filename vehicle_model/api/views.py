@@ -9,9 +9,9 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAdminUser
 )
-from aplusa_management.filters import VehicleModelFilter
+from vehicle_model.api.filters import VehicleModelFilter
 from rest_framework import filters
-import django_filters
+from django_filters import rest_framework as filter
 
 
 class VehicleModelListCreateAPIView(ListCreateAPIView):
@@ -19,7 +19,7 @@ class VehicleModelListCreateAPIView(ListCreateAPIView):
     queryset=VehicleModel.objects.all().order_by('id')
     serializer_class=VehicleModelSerializer
     filter_class = VehicleModelFilter
-    filter_backends = (django_filters.rest_framework.DjangoFilterBackend, filters.OrderingFilter)
+    filter_backends = (filter.DjangoFilterBackend, filters.OrderingFilter)
     ordering_fields = '__all__'
    
     
