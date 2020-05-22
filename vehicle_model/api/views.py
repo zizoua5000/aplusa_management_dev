@@ -22,8 +22,6 @@ class VehicleModelListCreateAPIView(ListCreateAPIView):
     filter_backends = (filter.DjangoFilterBackend, filters.OrderingFilter)
     ordering_fields = '__all__'
    
-    
-    
 
 
 class VehicleModelUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
@@ -37,4 +35,5 @@ class VehicleModelUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
             return Response("This is using in another table", status=status.HTTP_400_BAD_REQUEST)
         self.perform_destroy(instance)
         return Response("Deleted", status=status.HTTP_200_OK)
-        
+   
+    
