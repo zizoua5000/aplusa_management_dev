@@ -6,11 +6,17 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAdminUser
 )
+from vehicle.api.filters import VehicleFilter
+from rest_framework import filters
+from django_filters import rest_framework as filter
 
 class VehicleListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
     queryset=Vehicle.objects.all()
     serializer_class=VehicleSerializer
+    filter_class = VehicleFilter
+    filter_backends = (filter.DjangoFilterBackend, filters.OrderingFilter)
+    ordering_fields = '__all__'
     # permission_classes=[IsAuthenticated]
 
 class VehicleUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):

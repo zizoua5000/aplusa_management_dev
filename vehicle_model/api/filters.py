@@ -11,4 +11,4 @@ class VehicleModelFilter(filter.FilterSet):
     class Meta:
         model = VehicleModel
         fields = ['name','vehicle_mark','id']
- 
+
