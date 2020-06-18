@@ -13,6 +13,10 @@ from vehicle_model.api.filters import VehicleModelFilter
 from rest_framework import filters
 from django_filters import rest_framework as filter
 
+# from aplusa_management.filters import VehicleModelFilter
+# from rest_framework import filters
+# import django_filters
+
 
 class VehicleModelListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
