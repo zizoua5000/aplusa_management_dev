@@ -13,8 +13,10 @@ class VehicleFilter(filter.FilterSet):
     comment = filter.CharFilter(lookup_expr='icontains')
     vehicle_model = NumberInFilter(field_name='vehicle_model', lookup_expr='in')
     vehicle_type = NumberInFilter(field_name='vehicle_type', lookup_expr='in')
+    vehicle_mark = NumberInFilter(field_name ='vehicle_model__vehicle_mark', lookup_expr='in')
 
     class Meta:
         model = Vehicle
-        fields = ['plate','serie_number','id','comment','vehicle_model','vehicle_type']
+        fields = ['plate','serie_number','id','comment','vehicle_model','vehicle_type','vehicle_mark']
+
 

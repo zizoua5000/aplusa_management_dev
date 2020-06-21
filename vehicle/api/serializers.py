@@ -18,11 +18,13 @@ class VehicleSerializer(ModelSerializer):
                 'vehicle_type',
                 'vehicle_type_detail',
                 'created_at',
-                'updated_at'
+                'updated_at',
                 ]
 
         def get_vehicle_model_detail(self,obj):
             return VehicleModelSerializer(obj.vehicle_model).data           
         def get_vehicle_type_detail(self,obj):
             return VehicleTypeSerializer(obj.vehicle_type).data
+
+            
 
