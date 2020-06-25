@@ -31,7 +31,7 @@ class CompanyTypeUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        if Company.objects.filter(compaany_type=instance.id).first():
+        if Company.objects.filter(company_type=instance.id).first():
             return Response("This is using in another table", status=status.HTTP_400_BAD_REQUEST)
         self.perform_destroy(instance)
         return Response("Deleted", status=status.HTTP_200_OK)
