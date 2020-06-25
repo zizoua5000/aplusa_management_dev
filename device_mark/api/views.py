@@ -6,11 +6,17 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAdminUser
 )
+from device_mark.api.filters import DeviceMarkFilter
+from rest_framework import filters
+from django_filters import rest_framework as filter
 
 class DeviceMarkListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
     queryset=DeviceMark.objects.all()
     serializer_class=DeviceMarkSerializer
+    filter_class = DeviceMarkFilter
+    filter_backends = (filter.DjangoFilterBackend, filters.OrderingFilter)
+    ordering_fields = '__all__'
     # permission_classes=[IsAuthenticated]
 
 class DeviceMarkUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
