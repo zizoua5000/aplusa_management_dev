@@ -6,11 +6,17 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAdminUser
 )
+from device_type.api.filters import DeviceTypeFilter
+from rest_framework import filters
+from django_filters import rest_framework as filter
 
 class DeviceTypeListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
     queryset=DeviceType.objects.all()
     serializer_class=DeviceTypeSerializer
+    filter_backends = (filter.DjangoFilterBackend,filters.OrderingFilter)
+    filter_class = DeviceTypeFilter
+    ordering_fields = '__all__'
     # permission_classes=[IsAuthenticated]
 
 class DeviceTypeUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):

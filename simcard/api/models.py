@@ -5,7 +5,7 @@ from django.db import models
 class Simcard(models.Model):
     number = models.CharField(unique=True,max_length=20, blank=False, null=False)
     package = models.BigIntegerField(blank=True, null=True)
-    has_roumnig = models.BooleanField(blank=False, null=False)
+    has_rouming = models.BooleanField(blank=False, null=False)
     is_active = models.BooleanField(blank=False, null=False)
     created_at = models.DateTimeField(editable=False)
     updated_at = models.DateTimeField(editable=False)
