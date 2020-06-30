@@ -5,10 +5,17 @@ from department.api.serializers import DepartmentSerializer
 from job_title.api.serializers import JobTitleSerializer
 from django.contrib.auth.models import User
 
+class UserSerializer(ModelSerializer):
+        class Meta:
+            model = User
+            fields = ['id', 'username', 'password','is_active']
+
+
 class PersonSerializer(ModelSerializer):
         company_detail=SerializerMethodField()
         department_detail=SerializerMethodField()
         job_title_detail=SerializerMethodField()
+        user_detail=SerializerMethodField()
 
         class Meta:
             model=Person
@@ -20,6 +27,7 @@ class PersonSerializer(ModelSerializer):
                 'email',
                 'photo',
                 'user',
+                'user_detail',
                 'company',
                 'company_detail',
                 'department',
@@ -28,6 +36,8 @@ class PersonSerializer(ModelSerializer):
                 'job_title_detail'
                 ]
 
+        def get_user_detail(self,obj):
+            return UserSerializer(obj.user).data
         def get_company_detail(self,obj):
             return CompanySerializer(obj.company).data
         def get_department_detail(self,obj):
