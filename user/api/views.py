@@ -9,11 +9,17 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAdminUser
 )
+from user.api.filters import UserFilter
+from rest_framework import filters
+from django_filters import rest_framework as filter
 
 class UserRegisterListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
     queryset=User.objects.all()
     serializer_class=UserRegisterSerializer
+    filter_class = UserFilter
+    filter_backends = (filter.DjangoFilterBackend, filters.OrderingFilter)
+    ordering_fields = '__all__'
     # permission_classes=[IsAuthenticated]
 
 class UserUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
