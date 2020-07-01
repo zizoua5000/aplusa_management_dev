@@ -15,9 +15,9 @@ class DeviceDetailSerializer(ModelSerializer):
         simcard_detail=SerializerMethodField()
         vehicle_detail=SerializerMethodField()
         company_detail=SerializerMethodField()
-        recipient_detail=SerializerMethodField()
+        # recipient_detail=SerializerMethodField()
         device_location_detail=SerializerMethodField()
-        configuration_detail=SerializerMethodField()
+        # configuration_detail=SerializerMethodField()
         project_detail=SerializerMethodField()
         region_detail=SerializerMethodField()
 
@@ -33,12 +33,12 @@ class DeviceDetailSerializer(ModelSerializer):
                 'vehicle_detail',
                 'company',
                 'company_detail',
-                'recipient',
-                'recipient_detail',
+                # 'recipient',
+                # 'recipient_detail',
                 'device_location',
                 'device_location_detail',
-                'configuration',
-                'configuration_detail',
+                # 'configuration',
+                # 'configuration_detail',
                 'project',
                 'project_detail',
                 'region',
@@ -57,13 +57,15 @@ class DeviceDetailSerializer(ModelSerializer):
             return VehicleSerializer(obj.vehicle).data
         def get_company_detail(self,obj):
             return CompanySerializer(obj.company).data
-        def get_recipient_detail(self,obj):
-            return PersonSerializer(obj.recipient).data
+        # def get_recipient_detail(self,obj):
+        #     return PersonSerializer(obj.recipient).data
         def get_device_location_detail(self,obj):
             return DeviceLocationSerializer(obj.device_location).data
-        def get_configuration_detail(self,obj):
-            return ConfigurationSerializer(obj.configuration).data
+        # def get_configuration_detail(self,obj):
+        #     return ConfigurationSerializer(obj.configuration).data
         def get_project_detail(self,obj):
             return ProjectSerializer(obj.project).data
         def get_region_detail(self,obj):
             return RegionSerializer(obj.region).data
+
+       
