@@ -11,7 +11,6 @@ from rest_framework.permissions import (
 )
 
 
-
 class PriceTypeListCreateAPIView(ListCreateAPIView):  
     permission_classes = (CustomDjangoModelPermissions, )
     queryset=PriceType.objects.all().order_by('id')

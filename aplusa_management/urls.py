@@ -37,7 +37,7 @@ urlpatterns = [
     path('api/region/', include('region.api.urls')),
     path('api/simcard/', include('simcard.api.urls')),
     path('api/project/', include('project.api.urls')),
-    path('api/price_type/', include('price.api.urls')),
+    path('api/price_type/', include('price_type.api.urls')),
     path('api/price/', include('price.api.urls')),
     path('api/job_title/', include('job_title.api.urls')),
     path('api/status/', include('status.api.urls')),
