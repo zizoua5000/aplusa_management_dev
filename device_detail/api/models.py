@@ -19,9 +19,9 @@ class DeviceDetail(models.Model):
     # Bu hisse muzakire olunacaq----------------------------------------
     # installer_event_id = models.BigIntegerField(blank=True, null=True)
     #-------------------------------------------------------------------
-    recipient = models.ForeignKey('person.Person', models.DO_NOTHING, blank=True, null=True)
+    # recipient = models.ForeignKey('person.Person', models.DO_NOTHING, blank=True, null=True)
     device_location = models.ForeignKey('device_location.DeviceLocation', models.DO_NOTHING, blank=True, null=True)
-    configuration = models.ForeignKey('configuration.Configuration', models.DO_NOTHING, blank=True, null=True)
+    # configuration = models.ForeignKey('configuration.Configuration', models.DO_NOTHING, blank=True, null=True)
     project = models.ForeignKey('project.Project', models.DO_NOTHING, blank=True, null=True)
     region = models.ForeignKey('region.Region', models.DO_NOTHING, blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
@@ -33,5 +33,6 @@ class DeviceDetail(models.Model):
         managed = False
         db_table = 'device_detail'
 
-    def __str__(self):
+    def __str__(self):     
+        print(self.status.name)   
         return self.status.name
