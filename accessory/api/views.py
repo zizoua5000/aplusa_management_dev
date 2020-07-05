@@ -6,11 +6,17 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAdminUser
 )
+from accessory.api.filters import AccessoryFilter
+from rest_framework import filters
+from django_filters import rest_framework as filter
 
 class AccessoryListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
     queryset=Accessory.objects.all()
     serializer_class=AccessorySerializer
+    filter_class = AccessoryFilter
+    filter_backends = (filter.DjangoFilterBackend, filters.OrderingFilter)
+    ordering_fields = '__all__'
     # permission_classes=[IsAuthenticated]
 
 class AccessoryUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
