@@ -79,6 +79,8 @@ INSTALLED_APPS = [
     'device_detail_view',
     'device',
     'user',
+    'content_type',
+    'permission',
     'user_permission'
 ]
 

@@ -37,7 +37,7 @@ urlpatterns = [
     path('api/region/', include('region.api.urls')),
     path('api/simcard/', include('simcard.api.urls')),
     path('api/project/', include('project.api.urls')),
-    path('api/price_type/', include('price.api.urls')),
+    path('api/price_type/', include('price_type.api.urls')),
     path('api/price/', include('price.api.urls')),
     path('api/job_title/', include('job_title.api.urls')),
     path('api/status/', include('status.api.urls')),
@@ -50,5 +50,7 @@ urlpatterns = [
     path('api/device_detail_view/', include('device_detail_view.api.urls')),
     path('api/device/', include('device.api.urls')),
     path('api/user/', include('user.api.urls')),
+    path('api/content_type/', include('content_type.api.urls')),
+    path('api/permission/', include('permission.api.urls')),
     path('api/user_permission/', include('user_permission.api.urls'))
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
