@@ -35,4 +35,3 @@ class DeviceSerializer(ModelSerializer):
             return DeviceTypeSerializer(obj.device_type).data
         def get_device_detail_detail(self,obj):
             return DeviceDetailSerializer(obj.device_detail).data
-

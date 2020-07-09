@@ -47,6 +47,7 @@ urlpatterns = [
     path('api/device_model/', include('device_model.api.urls')),
     path('api/device_location/', include('device_location.api.urls')),
     path('api/device_detail/', include('device_detail.api.urls')),
+    path('api/device_detail_view/', include('device_detail_view.api.urls')),
     path('api/device/', include('device.api.urls')),
     path('api/user/', include('user.api.urls')),
     path('api/content_type/', include('content_type.api.urls')),

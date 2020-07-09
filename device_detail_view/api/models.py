@@ -10,16 +10,17 @@ from device_location.api.models import DeviceLocation
 from configuration.api.models import Configuration
 from project.api.models import Project
 from region.api.models import Region
+from device_model.api.models import DeviceModel
+from device_type.api.models import DeviceType
 
-class DeviceDetail(models.Model):
+class DeviceDetailView(models.Model):
+    serie = models.CharField(unique=True,max_length=100, blank=False, null=False)
+    device_model = models.ForeignKey(DeviceModel, models.DO_NOTHING, blank=False, null=False)
+    device_type = models.ForeignKey(DeviceType, models.DO_NOTHING, blank=False, null=False)
     status = models.ForeignKey('status.Status', models.DO_NOTHING, blank=False, null=False)
     simcard = models.ForeignKey('simcard.Simcard', models.DO_NOTHING, blank=True, null=True)
     vehicle = models.ForeignKey('vehicle.Vehicle', models.DO_NOTHING, blank=True, null=True)
     company = models.ForeignKey('company.Company', models.DO_NOTHING, blank=True, null=True)
-    # Bu hisse muzakire olunacaq----------------------------------------
-    # installer_event_id = models.BigIntegerField(blank=True, null=True)
-    #-------------------------------------------------------------------
-    # recipient = models.ForeignKey('person.Person', models.DO_NOTHING, blank=True, null=True)
     device_location = models.ForeignKey('device_location.DeviceLocation', models.DO_NOTHING, blank=True, null=True)
     configuration = models.ForeignKey('configuration.Configuration', models.DO_NOTHING, blank=True, null=True)
     project = models.ForeignKey('project.Project', models.DO_NOTHING, blank=True, null=True)
@@ -31,7 +32,16 @@ class DeviceDetail(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'device_detail'
+        db_table = 'device_detail_view'
 
-    def __str__(self):     
-        return self.status.name
+    # def save(self, *args,**kwargs):
+    #     if not self.id:
+    #         # print("---------------------------")
+    #         # print(self)
+    #         # print("---------------------------")
+    #         self.created_at=timezone.now()
+    #     self.updated_at=timezone.now()
+    #     return super(DeviceDetailView, self).save( *args,**kwargs)
+
+    def __str__(self):
+        return self.serie

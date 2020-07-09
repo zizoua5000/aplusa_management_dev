@@ -21,7 +21,9 @@ class Device(models.Model):
         db_table = 'device'
 
     def save(self, *args,**kwargs):
+        
         if not self.id:
+            
             self.created_at=timezone.now()
         self.updated_at=timezone.now()
         return super(Device, self).save( *args,**kwargs)
