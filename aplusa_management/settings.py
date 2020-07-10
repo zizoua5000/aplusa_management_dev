@@ -76,7 +76,6 @@ INSTALLED_APPS = [
     'device_model',
     'device_location',
     'device_detail',
-    'device_detail_view',
     'device',
     'user',
     'content_type',
