@@ -5,6 +5,7 @@ from device_model.api.serializers import DeviceModelSerializer
 from accessory_model.api.serializers import AccessoryModelSerializer
 from project.api.serializers import ProjectSerializer
 
+
 class PriceSerializer(ModelSerializer):
         price_type_detail=SerializerMethodField()
         device_model_detail=SerializerMethodField()

@@ -1,5 +1,7 @@
 from django_filters import rest_framework as filter
 from device.api.models import Device
+from price.api.customfilter import DateListFilter
+
 
 class NumberInFilter(filter.BaseInFilter, filter.NumberFilter,):
     pass
@@ -25,12 +27,14 @@ class DeviceFilter(filter.FilterSet):
     configuration = NumberInFilter(field_name ='device_details__configuration', lookup_expr='in')
     project = NumberInFilter(field_name ='device_details__project', lookup_expr='in')
     region = NumberInFilter(field_name ='device_details__region', lookup_expr='in')
+    status_datetime = DateListFilter(field_name='device_details__status_datetime__date',lookup_expr='in')
+    price_datetime = DateListFilter(field_name='device_details__price_datetime__date',lookup_expr='in')
     comment=filter.CharFilter(field_name ='device_details__comment',lookup_expr='icontains')
 
     class Meta:
         model = Device
         fields = ['serie','id','device_model','device_type','device_mark','status','company_vehicle',
         'simcard','simcard','plate','recipient','package','has_rouming','is_active','device_location',
-        'configuration','project','region','comment']
+        'configuration','project','region','comment','status_datetime','price_datetime']
 
 

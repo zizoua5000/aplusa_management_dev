@@ -16,13 +16,14 @@ class PersonSerializer(ModelSerializer):
         department_detail=SerializerMethodField()
         job_title_detail=SerializerMethodField()
         user_detail=SerializerMethodField()
-
+        full_name = SerializerMethodField()
         class Meta:
             model=Person
             fields=[
                 'id',
                 'first_name',
                 'last_name',
+                'full_name',
                 'phone',
                 'email',
                 'photo',
@@ -44,4 +45,6 @@ class PersonSerializer(ModelSerializer):
             return DepartmentSerializer(obj.department).data
         def get_job_title_detail(self,obj):
             return JobTitleSerializer(obj.job_title).data
+        def get_full_name(self, obj):
+            return '{} {}'.format(obj.first_name, obj.last_name) 
 
