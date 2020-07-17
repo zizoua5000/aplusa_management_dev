@@ -1,5 +1,5 @@
 from django.urls import path
-from responsible_person.api.views import ResponsiblePersonCreateAPIView,ResponsiblePersonUpdateDeleteAPIView
+from responsible_person.api.views import ResponsiblePersonListCreateAPIView,ResponsiblePersonUpdateDeleteAPIView
 
 app_name='responsible_person'
 urlpatterns = [

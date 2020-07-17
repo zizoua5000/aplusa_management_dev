@@ -51,5 +51,6 @@ urlpatterns = [
     path('api/user/', include('user.api.urls')),
     path('api/content_type/', include('content_type.api.urls')),
     path('api/permission/', include('permission.api.urls')),
-    path('api/user_permission/', include('user_permission.api.urls'))
+    path('api/user_permission/', include('user_permission.api.urls')),
+    path('api/responsible_person/', include('responsible_person.api.urls'))
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

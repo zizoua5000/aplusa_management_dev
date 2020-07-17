@@ -5,8 +5,8 @@ from person.api.models import Person
 
 class ResponsiblePerson(models.Model):
     department = models.ForeignKey(Department, models.DO_NOTHING, blank=False, null=False)
-    department_chief = models.ForeignKey(Person, models.DO_NOTHING, related_name='department_chief', blank=False, null=False)
-    chief_substitute = models.ForeignKey(Person, models.DO_NOTHING, related_name='chief_substitute', blank=False, null=False)
+    department_chief = models.ForeignKey(Person, models.DO_NOTHING,  unique=True,related_name='department_chief', blank=False, null=False)
+    chief_substitute = models.ForeignKey(Person, models.DO_NOTHING, unique=True, related_name='chief_substitute', blank=False, null=False)
     accounter = models.ForeignKey(Person, models.DO_NOTHING, related_name='accounter', blank=False, null=False)
     recipient = models.ForeignKey(Person, models.DO_NOTHING, related_name='recipient', blank=False, null=False)
     provider = models.ForeignKey(Person, models.DO_NOTHING, related_name='provider', blank=False, null=False)
