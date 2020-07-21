@@ -25,6 +25,7 @@ class DeviceFilter(filter.FilterSet):
     recipient = NumberInFilter(field_name ='device_details__recipient', lookup_expr='in')
     device_location = NumberInFilter(field_name ='device_details__device_location', lookup_expr='in')
     configuration = NumberInFilter(field_name ='device_details__configuration', lookup_expr='in')
+    fw_version = NumberInFilter(field_name ='device_details__fw_version', lookup_expr='in')
     project = NumberInFilter(field_name ='device_details__project', lookup_expr='in')
     region = NumberInFilter(field_name ='device_details__region', lookup_expr='in')
     status_datetime = DateListFilter(field_name='device_details__status_datetime__date',lookup_expr='in')
@@ -35,6 +36,6 @@ class DeviceFilter(filter.FilterSet):
         model = Device
         fields = ['serie','id','device_model','device_type','device_mark','status','company_vehicle',
         'simcard','simcard','plate','recipient','package','has_rouming','is_active','device_location',
-        'configuration','project','region','comment','status_datetime','price_datetime']
+        'configuration','fw_version','project','region','comment','status_datetime','price_datetime']
 
 
