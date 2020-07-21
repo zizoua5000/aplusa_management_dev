@@ -81,7 +81,8 @@ INSTALLED_APPS = [
     'content_type',
     'permission',
     'user_permission',
-    'responsible_person'
+    'responsible_person',
+    'fw_version'
 ]
 
 MIDDLEWARE = [
