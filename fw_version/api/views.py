@@ -1,4 +1,6 @@
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
+from rest_framework import status
+from rest_framework.response import Response
 from fw_version.api.serializers import FWVersionSerializer
 from fw_version.api.models import FWVersion
 from device_detail.api.models import DeviceDetail
