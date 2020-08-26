@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     'accessory_model',
     'accessory_type',
     'accessory',
+    'accessory_history',
+    'accessory_fixing',
     'company_type',
     'company',
     'configuration',
@@ -81,7 +83,8 @@ INSTALLED_APPS = [
     'content_type',
     'permission',
     'user_permission',
-    'responsible_person'
+    'responsible_person',
+    'qaime',
 ]
 
 MIDDLEWARE = [

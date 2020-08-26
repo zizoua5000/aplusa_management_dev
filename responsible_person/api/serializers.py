@@ -30,11 +30,9 @@ class ResponsiblePersonSerializer(ModelSerializer):
                 'created_at',
                 'updated_at',
                 ]
-
         def get_department_detail(self,obj):
             return DepartmentSerializer(obj.department).data 
         def get_department_chief_detail(self,obj):
-            # print("OBJECT: ",str(obj))
             return PersonSerializer(obj.department_chief).data
         def get_chief_substitute_detail(self,obj):
             return PersonSerializer(obj.chief_substitute).data                       
@@ -43,5 +41,8 @@ class ResponsiblePersonSerializer(ModelSerializer):
         def get_recipient_detail(self,obj):
             return PersonSerializer(obj.recipient).data
         def get_provider_detail(self,obj):
-            return PersonSerializer(obj.provider).data            
+            return PersonSerializer(obj.provider).data     
+        def create(self, validated_data):
+            print("Validated data ", validated_data)
+            return validated_data       
 

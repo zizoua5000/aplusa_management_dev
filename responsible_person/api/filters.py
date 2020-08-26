@@ -14,7 +14,7 @@ class ResponsiblePersonFilter(filter.FilterSet):
     accounter = NumberInFilter(field_name='accounter', lookup_expr='in')
     recipient = NumberInFilter(field_name='recipient', lookup_expr='in')
     provider = NumberInFilter(field_name ='provider', lookup_expr='in')
-    active = filter.BooleanFilter(field_name='active')
+    active = NumberInFilter(field_name='active',lookup_expr='in')
 
     class Meta:
         model = ResponsiblePerson
