@@ -30,6 +30,8 @@ urlpatterns = [
     path('api/accessory_model/', include('accessory_model.api.urls')),
     path('api/accessory_type/', include('accessory_type.api.urls')),
     path('api/accessory/', include('accessory.api.urls')),
+    path('api/accessory_history/', include('accessory_history.api.urls')),
+    path('api/accessory_fixing/', include('accessory_fixing.api.urls')),
     path('api/company_type/', include('company_type.api.urls')),
     path('api/company/', include('company.api.urls')),
     path('api/configuration/', include('configuration.api.urls')),
@@ -57,4 +59,6 @@ urlpatterns = [
     path('api/action/', include('action.api.urls')),
     path('api/action_group/', include('action_group.api.urls')),
     path('api/event_type/', include('event_type.api.urls')),
+    path('api/qaime/', include('qaime.api.urls')),
+
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

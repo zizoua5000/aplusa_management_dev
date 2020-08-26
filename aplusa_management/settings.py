@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     'accessory_model',
     'accessory_type',
     'accessory',
+    'accessory_history',
+    'accessory_fixing',
     'company_type',
     'company',
     'configuration',
@@ -86,6 +88,7 @@ INSTALLED_APPS = [
     'action',
     'action_group',
     'event_type'
+    'qaime',
 ]
 
 MIDDLEWARE = [
