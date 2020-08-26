@@ -9,6 +9,7 @@ from device_location.api.serializers import DeviceLocationSerializer
 from configuration.api.serializers import ConfigurationSerializer
 from project.api.serializers import ProjectSerializer
 from region.api.serializers import RegionSerializer
+from fw_version.api.serializers import FWVersionSerializer
 
 class DeviceDetailSerializer(ModelSerializer):
         status_detail=SerializerMethodField()
@@ -20,6 +21,7 @@ class DeviceDetailSerializer(ModelSerializer):
         configuration_detail=SerializerMethodField()
         project_detail=SerializerMethodField()
         region_detail=SerializerMethodField()
+        fw_version_detail=SerializerMethodField()
 
         class Meta:
             model=DeviceDetail
@@ -39,6 +41,8 @@ class DeviceDetailSerializer(ModelSerializer):
                 'device_location_detail',
                 'configuration',
                 'configuration_detail',
+                'fw_version',
+                'fw_version_detail',
                 'project',
                 'project_detail',
                 'region',
@@ -67,5 +71,7 @@ class DeviceDetailSerializer(ModelSerializer):
             return ProjectSerializer(obj.project).data
         def get_region_detail(self,obj):
             return RegionSerializer(obj.region).data
+        def get_fw_version_detail(self,obj):
+            return FWVersionSerializer(obj.fw_version).data
 
        

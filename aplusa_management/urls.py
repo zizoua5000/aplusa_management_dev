@@ -55,6 +55,10 @@ urlpatterns = [
     path('api/permission/', include('permission.api.urls')),
     path('api/user_permission/', include('user_permission.api.urls')),
     path('api/responsible_person/', include('responsible_person.api.urls')),
+    path('api/fw_version/', include('fw_version.api.urls')),
+    path('api/action/', include('action.api.urls')),
+    path('api/action_group/', include('action_group.api.urls')),
+    path('api/event_type/', include('event_type.api.urls')),
     path('api/qaime/', include('qaime.api.urls')),
 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

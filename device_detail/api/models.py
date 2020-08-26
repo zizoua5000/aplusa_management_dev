@@ -11,6 +11,7 @@ from device_location.api.models import DeviceLocation
 from configuration.api.models import Configuration
 from project.api.models import Project
 from region.api.models import Region
+from fw_version.api.models import FWVersion
 
 class DeviceDetail(models.Model):
     device = models.OneToOneField(Device,related_name='device_details',on_delete=models.CASCADE)
@@ -30,6 +31,7 @@ class DeviceDetail(models.Model):
     price_datetime = models.DateTimeField(blank=True, null=True)
     status_datetime = models.DateTimeField(blank=True, null=True)
     sell_count = models.BigIntegerField(blank=True, null=True)
+    fw_version = models.ForeignKey(FWVersion, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False

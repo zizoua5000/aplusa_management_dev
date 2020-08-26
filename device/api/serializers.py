@@ -60,6 +60,7 @@ class DeviceSerializer(ModelSerializer):
             device_details.company=device_details_data.get('company',device_details.company)
             device_details.device_location=device_details_data.get('device_location',device_details.device_location)
             device_details.configuration=device_details_data.get('configuration',device_details.configuration)
+            device_details.fw_version=device_details_data.get('fw_version',device_details.fw_version)
             device_details.project=device_details_data.get('project',device_details.project)
             device_details.recipient=device_details_data.get('recipient',device_details.recipient)
             device_details.region=device_details_data.get('region',device_details.region)
