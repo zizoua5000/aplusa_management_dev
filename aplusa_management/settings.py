@@ -82,7 +82,10 @@ INSTALLED_APPS = [
     'permission',
     'user_permission',
     'responsible_person',
-    'fw_version'
+    'fw_version',
+    'action',
+    'action_group',
+    'event_type'
 ]
 
 MIDDLEWARE = [
