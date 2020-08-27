@@ -87,8 +87,9 @@ INSTALLED_APPS = [
     'fw_version',
     'action',
     'action_group',
-    'event_type'
+    'event_type',
     'qaime',
+    'qaime_type'
 ]
 
 MIDDLEWARE = [
