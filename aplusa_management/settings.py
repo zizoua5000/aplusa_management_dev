@@ -90,6 +90,7 @@ INSTALLED_APPS = [
     'action_group',
     'event_type',
     'qaime',
+    'qaime_type'
 ]
 
 MIDDLEWARE = [

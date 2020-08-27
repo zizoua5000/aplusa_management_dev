@@ -61,5 +61,6 @@ urlpatterns = [
     path('api/action_group/', include('action_group.api.urls')),
     path('api/event_type/', include('event_type.api.urls')),
     path('api/qaime/', include('qaime.api.urls')),
+    path('api/qaime_type/', include('qaime_type.api.urls')),
 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
