@@ -13,13 +13,13 @@ from project.api.models import Project
 from fw_version.api.models import FWVersion
 from simcard.api.models import Simcard
 
-class Device(models.Model):
+class DeviceHistory(models.Model):
     serie = models.CharField(unique=True,max_length=100, blank=False, null=False)
-    company = models.ForeignKey(Company, models.DO_NOTHING,related_name='device_company', blank=True, null=True)
+    company = models.ForeignKey(Company, models.DO_NOTHING,related_name='device_history_company', blank=True, null=True)
     device_model = models.ForeignKey(DeviceModel, models.DO_NOTHING, blank=False, null=False)
     device_type = models.ForeignKey(DeviceType, models.DO_NOTHING, blank=False, null=False)
-    manufacturer = models.ForeignKey(Company, models.DO_NOTHING,related_name='manufacturer', blank=True, null=True)
-    status = models.ForeignKey(Status, models.DO_NOTHING,related_name='status', blank=False, null=False)
+    manufacturer = models.ForeignKey(Company, models.DO_NOTHING,related_name='device_history_manufacturer', blank=True, null=True)
+    status = models.ForeignKey(Status, models.DO_NOTHING,related_name='device_history_status', blank=False, null=False)
     simcard = models.ForeignKey(Simcard, models.DO_NOTHING, blank=True, null=True)
     vehicle = models.ForeignKey(Vehicle, models.DO_NOTHING, blank=True, null=True)
     recipient = models.ForeignKey(Person, models.DO_NOTHING, unique=True,  blank=True, null=True)
@@ -34,7 +34,7 @@ class Device(models.Model):
     manufacture_date = models.DateTimeField(blank=True, null=True)
     buy_date = models.DateTimeField(blank=True, null=True)
     entry_warehouse_date = models.DateTimeField(blank=True, null=True)
-    webtrack_status = models.ForeignKey(Status, models.DO_NOTHING,related_name='webtrack_status', blank=False, null=False)
+    webtrack_status = models.ForeignKey(Status, models.DO_NOTHING,related_name='device_history_webtrack_status', blank=False, null=False)
     is_our = models.BooleanField(blank=False, null=False)
     is_rent = models.BooleanField(blank=False, null=False)
     is_sold = models.BooleanField(blank=False, null=False)
@@ -47,7 +47,7 @@ class Device(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'device'
+        db_table = 'device_history'
 
     def save(self, *args,**kwargs):
         
@@ -55,7 +55,7 @@ class Device(models.Model):
             
             self.created_at=timezone.now()
         self.updated_at=timezone.now()
-        return super(Device, self).save( *args,**kwargs)
+        return super(DeviceHistory, self).save( *args,**kwargs)
 
     def __str__(self):
         return self.serie

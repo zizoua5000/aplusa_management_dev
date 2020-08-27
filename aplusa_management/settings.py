@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'device_model',
     'device_location',
     'device_detail',
+    'device_history',
     'device',
     'user',
     'content_type',
@@ -87,7 +88,7 @@ INSTALLED_APPS = [
     'fw_version',
     'action',
     'action_group',
-    'event_type'
+    'event_type',
     'qaime',
 ]
 

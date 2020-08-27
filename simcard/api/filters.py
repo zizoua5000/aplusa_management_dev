@@ -12,11 +12,11 @@ class SimcardFilter(filter.FilterSet):
     package = NumberInFilter(field_name='package', lookup_expr='in') 
     has_rouming = filter.BooleanFilter(field_name='has_rouming')
     is_active = filter.BooleanFilter(field_name='is_active')
-    device = NumberInFilter(field_name='device', lookup_expr='in')
+    # device = NumberInFilter(field_name='device', lookup_expr='in')
 
 
     class Meta:
         model = Simcard
-        fields = ['number','package','id','has_rouming','is_active','device']
+        fields = ['number','package','id','has_rouming','is_active']
 
 

@@ -1,6 +1,5 @@
 from rest_framework.serializers import ModelSerializer,SerializerMethodField
-from device.api.models import Device
-from device_detail.api.models import DeviceDetail
+from device_history.api.models import DeviceHistory
 from company.api.serializers import CompanySerializer
 from device_detail.api.serializers import DeviceDetailSerializer
 from device_model.api.serializers import DeviceModelSerializer
@@ -15,7 +14,7 @@ from configuration.api.serializers import ConfigurationSerializer
 from project.api.serializers import ProjectSerializer
 from fw_version.api.serializers import FWVersionSerializer
 
-class DeviceSerializer(ModelSerializer):
+class DeviceHistorySerializer(ModelSerializer):
         # device_details = DeviceDetailSerializer(many=False)
         company_detail=SerializerMethodField()
         device_model_detail=SerializerMethodField()
@@ -30,7 +29,7 @@ class DeviceSerializer(ModelSerializer):
         project_detail=SerializerMethodField()
         fw_version_detail=SerializerMethodField()
         class Meta:
-            model=Device
+            model=DeviceHistory
             fields=[
                 'id','serie','company','company_detail','device_model','device_model_detail',
                 'device_type','device_type_detail','manufacturer','manufacturer_detail',

@@ -1,13 +1,13 @@
 from django_filters import rest_framework as filter
-from device.api.customfilter import DateListFilter
-from device.api.models import Device
+from device_history.api.customfilter import DateListFilter
+from device_history.api.models import DeviceHistory
 
 class NumberInFilter(filter.BaseInFilter, filter.NumberFilter,):
     pass
 class CharInFilter(filter.BaseInFilter, filter.CharFilter):
     pass
 
-class DeviceFilter(filter.FilterSet):
+class DeviceHistoryFilter(filter.FilterSet):
     id = NumberInFilter(field_name='id',lookup_expr='in')
     serie= CharInFilter(field_name='serie', lookup_expr='in')
     company = NumberInFilter(field_name='company', lookup_expr='in')
@@ -43,7 +43,7 @@ class DeviceFilter(filter.FilterSet):
     comment=filter.CharFilter(field_name ='comment',lookup_expr='icontains')
 
     class Meta:
-        model = Device
+        model = DeviceHistory
         fields = ['serie','id','device_model','device_type','device_mark','status','manufacturer',
         'simcard','plate','recipient','package','has_rouming','is_active','device_location',
         'configuration','fw_version','project','sell_count','rated_price','guarantee_to_us','guarantee_from_us','manufacture_date',
