@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'department',
     'region',
     'simcard',
+    'simcard_history',
     'project',
     'price_type',
     'price',
@@ -93,7 +94,11 @@ INSTALLED_APPS = [
     'qaime_type',
     'm_project_company',
     'm_vehicle_accessory',
-    'pending'
+    'pending',
+    'event',
+    'm_event_accessory',
+    'm_event_person',   
+    
 ]
 
 MIDDLEWARE = [

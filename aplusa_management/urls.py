@@ -38,6 +38,7 @@ urlpatterns = [
     path('api/department/', include('department.api.urls')),
     path('api/region/', include('region.api.urls')),
     path('api/simcard/', include('simcard.api.urls')),
+    path('api/simcard_history/', include('simcard_history.api.urls')),
     path('api/project/', include('project.api.urls')),
     path('api/price_type/', include('price_type.api.urls')),
     path('api/price/', include('price.api.urls')),
@@ -65,5 +66,8 @@ urlpatterns = [
     path('api/m_project_company/', include('m_project_company.api.urls')),
     path('api/m_vehicle_accessory/', include('m_vehicle_accessory.api.urls')),
     path('api/pending/', include('pending.api.urls')),
+    path('api/event/', include('event.api.urls')),
+    path('api/m_event_accessory/', include('m_event_accessory.api.urls')),
+    path('api/m_event_person/', include('m_event_person.api.urls')),
 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

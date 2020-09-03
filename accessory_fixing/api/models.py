@@ -28,5 +28,5 @@ class AccessoryFixing(models.Model):
         self.updated_at=timezone.now()
         return super(AccessoryFixing, self).save( *args,**kwargs)
 
-    # def __str__(self):
-    #     return self.name
+    def __str__(self):
+        return self.accessory.name
