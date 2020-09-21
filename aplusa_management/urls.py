@@ -69,5 +69,6 @@ urlpatterns = [
     path('api/event/', include('event.api.urls')),
     path('api/m_event_accessory/', include('m_event_accessory.api.urls')),
     path('api/m_event_person/', include('m_event_person.api.urls')),
+    path('api/currency_rate/', include('currency_rate.api.urls')),
 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

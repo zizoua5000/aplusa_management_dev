@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Accessory',
+            name='AccessoryFixing',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50, unique=True)),
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('deleted_at', models.DateTimeField(editable=False)),
             ],
             options={
-                'db_table': 'accessory',
+                'db_table': 'accessory_fixing',
                 'managed': False,
             },
         ),

@@ -97,8 +97,8 @@ INSTALLED_APPS = [
     'pending',
     'event',
     'm_event_accessory',
-    'm_event_person',   
-    
+    'm_event_person',
+    'currency_rate',      
 ]
 
 MIDDLEWARE = [

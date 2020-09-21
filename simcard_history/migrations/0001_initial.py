@@ -12,19 +12,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Simcard',
+            name='SimcardHistory',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('number', models.CharField(max_length=20, unique=True)),
-                ('package', models.BigIntegerField(blank=True, null=True)),
-                ('has_roumnig', models.BooleanField()),
-                ('is_active', models.BooleanField()),
                 ('created_at', models.DateTimeField(editable=False)),
-                ('updated_at', models.DateTimeField(editable=False)),
-                ('deleted_at', models.DateTimeField(editable=False)),
             ],
             options={
-                'db_table': 'simcard',
+                'db_table': 'simcard_history',
                 'managed': False,
             },
         ),

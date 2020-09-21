@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Device',
+            name='DeviceHistory',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('serie', models.CharField(max_length=100, unique=True)),
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('deleted_at', models.DateTimeField(editable=False)),
             ],
             options={
-                'db_table': 'device',
+                'db_table': 'device_history',
                 'managed': False,
             },
         ),
