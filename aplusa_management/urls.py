@@ -63,5 +63,6 @@ urlpatterns = [
     path('api/qaime_type/', include('qaime_type.api.urls')),
     path('api/m_project_company/', include('m_project_company.api.urls')),
     path('api/m_vehicle_accessory/', include('m_vehicle_accessory.api.urls')),
+    path('api/pending/', include('pending.api.urls'))
 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

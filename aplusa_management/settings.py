@@ -91,7 +91,8 @@ INSTALLED_APPS = [
     'qaime',
     'qaime_type',
     'm_project_company',
-    'm_vehicle_accessory'
+    'm_vehicle_accessory',
+    'pending'
 ]
 
 MIDDLEWARE = [
