@@ -38,6 +38,7 @@ urlpatterns = [
     path('api/department/', include('department.api.urls')),
     path('api/region/', include('region.api.urls')),
     path('api/simcard/', include('simcard.api.urls')),
+    path('api/simcard_history/', include('simcard_history.api.urls')),
     path('api/project/', include('project.api.urls')),
     path('api/price_type/', include('price_type.api.urls')),
     path('api/price/', include('price.api.urls')),
@@ -50,6 +51,7 @@ urlpatterns = [
     path('api/device_location/', include('device_location.api.urls')),
     path('api/device_detail/', include('device_detail.api.urls')),
     path('api/device/', include('device.api.urls')),
+    path('api/device_history/', include('device_history.api.urls')),
     path('api/user/', include('user.api.urls')),
     path('api/content_type/', include('content_type.api.urls')),
     path('api/permission/', include('permission.api.urls')),
@@ -63,6 +65,10 @@ urlpatterns = [
     path('api/qaime_type/', include('qaime_type.api.urls')),
     path('api/m_project_company/', include('m_project_company.api.urls')),
     path('api/m_vehicle_accessory/', include('m_vehicle_accessory.api.urls')),
-    path('api/pending/', include('pending.api.urls'))
+    path('api/pending/', include('pending.api.urls')),
+    path('api/event/', include('event.api.urls')),
+    path('api/m_event_accessory/', include('m_event_accessory.api.urls')),
+    path('api/m_event_person/', include('m_event_person.api.urls')),
+    path('api/currency_rate/', include('currency_rate.api.urls')),
 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

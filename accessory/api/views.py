@@ -12,7 +12,7 @@ from django_filters import rest_framework as filter
 
 class AccessoryListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
-    queryset=Accessory.objects.all()
+    queryset = Accessory.objects.all().order_by('id')
     serializer_class=AccessorySerializer
     filter_class = AccessoryFilter
     filter_backends = (filter.DjangoFilterBackend, filters.OrderingFilter)
@@ -21,6 +21,6 @@ class AccessoryListCreateAPIView(ListCreateAPIView):
 
 class AccessoryUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
-    queryset=Accessory.objects.all()
+    queryset=Accessory.objects.all().order_by('id')
     serializer_class=AccessorySerializer
     # permission_classes=[IsAuthenticated]
