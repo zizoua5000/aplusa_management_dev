@@ -91,6 +91,7 @@ INSTALLED_APPS = [
     'action_group',
     'event_type',
     'qaime',
+    'qaime_detail',
     'qaime_type',
     'm_project_company',
     'm_vehicle_accessory',

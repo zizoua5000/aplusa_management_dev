@@ -1,26 +1,26 @@
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
-from responsible_person.api.serializers import ResponsiblePersonSerializer
-from responsible_person.api.models import ResponsiblePerson
+from qaime_detail.api.serializers import QaimeDetailSerializer
+from qaime_detail.api.models import QaimeDetail
 from aplusa_management.permissions import CustomDjangoModelPermissions
 from rest_framework.permissions import (
     IsAuthenticated,
     IsAdminUser
 )
-from responsible_person.api.filters import ResponsiblePersonFilter
+from qaime_detail.api.filters import QaimeDetailFilter
 from rest_framework import filters
 from django_filters import rest_framework as filter
 
-class ResponsiblePersonListCreateAPIView(ListCreateAPIView):
+class QaimeDetailListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
-    queryset=ResponsiblePerson.objects.filter(active=1)
-    serializer_class=ResponsiblePersonSerializer
-    filter_class = ResponsiblePersonFilter
+    queryset=QaimeDetail.objects.all()
+    serializer_class=QaimeDetailSerializer
+    filter_class = QaimeDetailFilter
     filter_backends = (filter.DjangoFilterBackend, filters.OrderingFilter)
     ordering_fields = '__all__'
     # permission_classes=[IsAuthenticated]
 
-class ResponsiblePersonUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
+class QaimeDetailUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
-    queryset=ResponsiblePerson.objects.all()
-    serializer_class=ResponsiblePersonSerializer
+    queryset=QaimeDetail.objects.all()
+    serializer_class=QaimeDetailSerializer
     # permission_classes=[IsAuthenticated]

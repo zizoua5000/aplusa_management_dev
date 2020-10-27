@@ -7,7 +7,6 @@ from qaime.api.models import Qaime
 class QaimeSerializer(ModelSerializer): 
         responsible_person_detail=SerializerMethodField()
         recipient_detail=SerializerMethodField()
-        status_detail=SerializerMethodField()
         class Meta:
             model=Qaime
             fields=[
@@ -17,10 +16,8 @@ class QaimeSerializer(ModelSerializer):
                 'responsible_person_detail',
                 'recipient',
                 'recipient_detail',
-                'type',
+                'qaime_type',
                 'is_formal',
-                'status',
-                'status_detail',
                 'qaime_datetime',
                 'comment',
                 'created_at',
@@ -29,8 +26,6 @@ class QaimeSerializer(ModelSerializer):
         def get_responsible_person_detail(self,obj):
             return ResponsiblePersonSerializer(obj.responsible_person).data 
         def get_recipient_detail(self,obj):
-            return PersonSerializer(obj.person).data 
-        def get_status_detail(self,obj):
-            return StatusSerializer(obj.status).data 
+            return PersonSerializer(obj.recipient).data 
 
 

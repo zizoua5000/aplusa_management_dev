@@ -10,7 +10,6 @@ class AccessorySerializer(ModelSerializer):
         accessory_model_detail=SerializerMethodField()
         accessory_type_detail=SerializerMethodField()
         manufacturer_detail = SerializerMethodField()
-        entry_warehouse_date = serializers.DateTimeField(format=None,input_formats=None)
         class Meta:
             model=Accessory
             fields=[
@@ -25,8 +24,6 @@ class AccessorySerializer(ModelSerializer):
                 'is_new',
                 'is_our',
                 'count',
-                'rated_price',
-                'entry_warehouse_date',
                 'created_at',
                 'updated_at'
                 ]
