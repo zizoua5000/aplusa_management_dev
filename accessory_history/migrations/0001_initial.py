@@ -16,6 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50, unique=True)),
+                ('entry_warehouse_date', models.DateTimeField(editable=False,blank=True,null=True)),
                 ('created_at', models.DateTimeField(editable=False)),
             ],
             options={
