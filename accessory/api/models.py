@@ -13,8 +13,6 @@ class Accessory(models.Model):
     is_new = models.BooleanField(default=True, blank=True, null=True)
     is_our = models.BooleanField(default=True, blank=False, null=False)
     count = models.BigIntegerField(default=0, blank=True, null=True)
-    rated_price = models.FloatField(blank=False, null=False)
-    entry_warehouse_date = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(editable=False)
     updated_at = models.DateTimeField(editable=False)
     deleted_at = models.DateTimeField(editable=False)
