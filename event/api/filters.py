@@ -16,10 +16,11 @@ class EventFilter(filter.FilterSet):
     accessory_fixing = NumberInFilter(field_name='accessory_fixing', lookup_expr='in')
     simcard_history = NumberInFilter(field_name='simcard_history', lookup_expr='in')
     event_region = NumberInFilter(field_name='event_region', lookup_expr='in')
+    qaime = NumberInFilter(field_name='qaime', lookup_expr='in')
     event_datetime = DateListFilter(field_name='event_datetime',lookup_expr='in')
     event_price = NumberInFilter(field_name='event_price', lookup_expr='in')
     comment = filter.CharFilter(field_name ='comment',lookup_expr='icontain')
     class Meta:
         model = Event
         fields=['id','action','event_type','device_history','accessory_history','accessory_fixing',
-        'simcard_history','event_region','event_datetime','event_price','comment']
+        'simcard_history','event_region','qaime','event_datetime','event_price','comment']

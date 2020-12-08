@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer,SerializerMethodField
-from qaime.api.serializers import QaimeSerializer
+# from qaime.api.serializers import QaimeListSerializer
 from device.api.serializers import DeviceSerializer
 from accessory.api.serializers import AccessorySerializer
 from simcard.api.serializers import SimcardSerializer
@@ -9,8 +9,8 @@ from configuration.api.serializers import ConfigurationSerializer
 from fw_version.api.serializers import FWVersionSerializer
 from qaime_detail.api.models import QaimeDetail
 
-class QaimeDetailSerializer(ModelSerializer): 
-        qaime_detail=SerializerMethodField()
+class QaimeDetailListSerializer(ModelSerializer): 
+        # qaime_detail=SerializerMethodField()
         device_detail=SerializerMethodField()
         accessory_detail=SerializerMethodField()
         simcard_detail=SerializerMethodField()
@@ -23,7 +23,7 @@ class QaimeDetailSerializer(ModelSerializer):
             fields=[
                 'id',
                 'qaime',
-                'qaime_detail',
+                # 'qaime_detail',
                 'device',
                 'device_detail',
                 'accessory',
@@ -40,11 +40,12 @@ class QaimeDetailSerializer(ModelSerializer):
                 'fw_version_detail',
                 'count',
                 'is_new',
+                'sold_or_rent',
                 'created_at',
                 'updated_at'
                 ]
-        def get_qaime_detail(self,obj):
-            return QaimeSerializer(obj.qaime).data
+        # def get_qaime_detail(self,obj):
+        #     return QaimeListSerializer(obj.qaime).data
         def get_device_detail(self,obj):
             return DeviceSerializer(obj.device).data
         def get_accessory_detail(self,obj):

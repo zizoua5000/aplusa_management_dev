@@ -11,7 +11,7 @@ from configuration.api.models import Configuration
 from fw_version.api.models import FWVersion
 
 class QaimeDetail(models.Model):
-    qaime = models.ForeignKey(Qaime, models.DO_NOTHING, blank=False, null=False)
+    qaime = models.ForeignKey(Qaime, models.DO_NOTHING, blank=False, null=True)
     device = models.ForeignKey(Device, models.DO_NOTHING, blank=False, null=True)
     accessory = models.ForeignKey(Accessory, models.DO_NOTHING, blank=False, null=True)
     simcard = models.ForeignKey(Simcard, models.DO_NOTHING, blank=False, null=True)
@@ -20,7 +20,8 @@ class QaimeDetail(models.Model):
     configuration = models.ForeignKey(Configuration, models.DO_NOTHING, blank=False, null=True)
     fw_version = models.ForeignKey(FWVersion, models.DO_NOTHING, blank=False, null=True)
     count = models.BigIntegerField(default=1, blank=True, null=False)
-    is_new = models.IntegerField(blank=False, null=False)
+    is_new = models.IntegerField(blank=False, null=False,default=1)
+    sold_or_rent = models.IntegerField(blank=False, null=False,default=1)
     created_at = models.DateTimeField(editable=False)
     updated_at = models.DateTimeField(editable=False)
 
