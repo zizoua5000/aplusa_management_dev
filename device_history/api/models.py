@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db import models
 from company.api.models import Company
+from device.api.models import Device
 from device_model.api.models import DeviceModel
 from device_type.api.models import DeviceType
 from status.api.models import Status 
@@ -17,6 +18,7 @@ class DeviceHistory(models.Model):
     serie = models.CharField(unique=True,max_length=100, blank=False, null=False)
     company = models.ForeignKey(Company, models.DO_NOTHING,related_name='device_history_company', blank=True, null=True)
     device_model = models.ForeignKey(DeviceModel, models.DO_NOTHING, blank=False, null=False)
+    device = models.ForeignKey(Device, models.DO_NOTHING, blank=False, null=False)
     device_type = models.ForeignKey(DeviceType, models.DO_NOTHING, blank=False, null=False)
     manufacturer = models.ForeignKey(Company, models.DO_NOTHING,related_name='device_history_manufacturer', blank=True, null=True)
     status = models.ForeignKey(Status, models.DO_NOTHING,related_name='device_history_status', blank=False, null=False)

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-# from device.api.models import Device
+from device.api.models import Device
 from simcard.api.models import Simcard
 from django.utils import timezone
 from django.db import models
@@ -9,7 +9,7 @@ class SimcardHistory(models.Model):
     package = models.BigIntegerField(blank=True, null=True)
     has_rouming = models.BooleanField(blank=False, null=False)
     is_active = models.BooleanField(blank=False, null=False)
-    # device = models.ForeignKey(Device, models.DO_NOTHING, blank=False, null=False)
+    device = models.ForeignKey(Device, models.DO_NOTHING, blank=False, null=False)
     created_at = models.DateTimeField(editable=False)
 
     class Meta:

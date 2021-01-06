@@ -45,7 +45,7 @@ class UserPermissionCreateSerializer(ModelSerializer):
             for user_per in user_permission_old:
                 user_per.delete()
 
-        # After cretae new many to many relation data
+        # After create new many to many relation data
         for permission in permissions:
             p=Permission.objects.filter(codename=permission['codename'],content_type=permission['content_type']).first()
             UserPermission.objects.create(user=user,permission=p)

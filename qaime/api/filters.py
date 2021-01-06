@@ -7,12 +7,12 @@ class NumberInFilter(filter.BaseInFilter, filter.NumberFilter,):
 class CharInFilter(filter.BaseInFilter, filter.CharFilter):
     pass
 class QaimeFilter(filter.FilterSet):
-    name = CharInFilter(lookup_expr='icontains') 
+    name = filter.CharFilter(field_name='name',lookup_expr='icontains')
     responsible_person = NumberInFilter(field_name='responsible_person',lookup_expr='in')
     recipient = NumberInFilter(field_name='recipient',lookup_expr='in')
-    type = CharInFilter(field_name='type',lookup_expr='in')
-    is_formal = filter.BooleanFilter(field_name='is_second_hand')
+    qaime_type = NumberInFilter(field_name='qaime_type',lookup_expr='in')
     status = NumberInFilter(field_name='status',lookup_expr='in')
+    is_formal = filter.BooleanFilter(field_name='is_formal')
     qaime_datetime = DateListFilter(field_name='qaime_datetime__date',lookup_expr='in')
     comment = filter.CharFilter(field_name ='comment',lookup_expr='icontains')
     class Meta:

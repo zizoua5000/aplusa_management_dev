@@ -13,6 +13,8 @@ class AccessoryHistory(models.Model):
     qaime = models.ForeignKey(Qaime, models.DO_NOTHING, blank=True, null=True)
     status = models.ForeignKey(Status, models.DO_NOTHING, blank=True, null=True)
     created_at = models.DateTimeField(editable=False)
+    qaime = models.ForeignKey(Qaime, models.DO_NOTHING, blank=True, null=True)
+    status = models.ForeignKey(Status, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False

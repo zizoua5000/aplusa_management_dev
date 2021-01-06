@@ -29,6 +29,7 @@ class ResponsiblePersonSerializer(ModelSerializer):
                 'active',
                 'created_at',
                 'updated_at',
+                'name'
                 ]
         def get_department_detail(self,obj):
             return DepartmentSerializer(obj.department).data 
@@ -42,7 +43,7 @@ class ResponsiblePersonSerializer(ModelSerializer):
             return PersonSerializer(obj.recipient).data
         def get_provider_detail(self,obj):
             return PersonSerializer(obj.provider).data     
-        def create(self, validated_data):
-            print("Validated data ", validated_data)
-            return validated_data       
+        # def create(self, validated_data):
+        #     print("Validated data ", validated_data)
+        #     return validated_data       
 

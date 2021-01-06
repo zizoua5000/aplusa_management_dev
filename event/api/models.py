@@ -8,6 +8,7 @@ from accessory_history.api.models import AccessoryHistory
 from accessory_fixing.api.models import AccessoryFixing
 from simcard_history.api.models import SimcardHistory
 from region.api.models import Region
+from qaime.api.models import Qaime
 
 
 class Event(models.Model):
@@ -18,6 +19,7 @@ class Event(models.Model):
     accessory_fixing = models.ForeignKey(AccessoryFixing, models.DO_NOTHING, blank=True, null=True)
     simcard_history = models.ForeignKey(SimcardHistory, models.DO_NOTHING, blank=True, null=True)
     event_region = models.ForeignKey(Region, models.DO_NOTHING, blank=True, null=True)
+    qaime = models.ForeignKey(Qaime, models.DO_NOTHING, blank=True, null=True)
     event_datetime = models.DateTimeField(editable=False)
     event_price = models.FloatField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
