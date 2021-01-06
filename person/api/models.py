@@ -41,3 +41,4 @@ class Person(models.Model):
     
     def get_already_exist_person_photo(self):
         return Person.objects.get(id=self.id).photo
+

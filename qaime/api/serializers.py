@@ -3,10 +3,13 @@ from responsible_person.api.serializers import ResponsiblePersonSerializer
 from person.api.serializers import PersonSerializer
 from status.api.serializers import StatusSerializer
 from qaime_detail.api.serializers import QaimeDetailListSerializer
+from qaime_type.api.serializers import QaimeTypeSerializer
 from qaime.api.models import Qaime
 from qaime_detail.api.models import QaimeDetail
+from qaime_type.api.models import QaimeType
 from device.api.models import Device
 from accessory.api.models import Accessory
+from accessory_history.api.models import AccessoryHistory
 from simcard.api.models import Simcard
 from simcard_history.api.models import SimcardHistory
 from device_history.api.models import DeviceHistory
@@ -21,6 +24,8 @@ class QaimeListSerializer(ModelSerializer):
         responsible_person_detail=SerializerMethodField()
         recipient_detail=SerializerMethodField()
         status_detail=SerializerMethodField()
+        qaime_type_detail=SerializerMethodField()
+        qaime_details_detail=SerializerMethodField()
         class Meta:
             model=Qaime
             fields=[
@@ -33,9 +38,11 @@ class QaimeListSerializer(ModelSerializer):
                 'status',
                 'status_detail',
                 'qaime_type',
+                'qaime_type_detail',
                 'is_formal',
                 'qaime_datetime',
                 'comment',
+                'qaime_details_detail',
                 'created_at',
                 'updated_at',
                 ]
@@ -45,6 +52,10 @@ class QaimeListSerializer(ModelSerializer):
             return PersonSerializer(obj.recipient).data 
         def get_status_detail(self,obj):
             return StatusSerializer(obj.status).data 
+        def get_qaime_type_detail(self,obj):
+            return QaimeTypeSerializer(obj.qaime_type).data 
+        def get_qaime_details_detail(self,obj):
+            return QaimeDetailListSerializer(QaimeDetail.objects.filter(qaime=obj), many=True).data
 
 class QaimeChangeStatusSerializer(ModelSerializer): 
     #  This Serializer for updating status of Qaime to "Completed"
@@ -61,7 +72,6 @@ class QaimeChangeStatusSerializer(ModelSerializer):
             return instance
 
         
-
 class QaimeCreateSerializer(ModelSerializer):
     #  This Serializer for creating Qaime with the type of selling
     #  Method:POST
@@ -83,7 +93,7 @@ class QaimeCreateSerializer(ModelSerializer):
     #         "project":"Integer",
     #         "company":"Integer",
     #         "count":1,
-    #         "sold_or_rent":"Integer",
+    #         "sold_or_rent":"Boolean",
     #         "configuration":"Integer|null",
     #         "fw_version":"Integer|null"
     #         },
@@ -95,7 +105,7 @@ class QaimeCreateSerializer(ModelSerializer):
     #         "project":"Integer",
     #         "company":"Integer",
     #         "count":"Integer",
-    #         "is_new":"Integer",
+    #         "is_new":"Boolean",
     #         }
     #     ]
     # }
@@ -111,7 +121,7 @@ class QaimeCreateSerializer(ModelSerializer):
         qaime_details=attrs['qaime_details']
         device_list=[]
         simcard_list=[]
-        print(qaime_details)
+        # print(attrs)
         for q_d in qaime_details:
             if('device' not in q_d):
                 raise ValidationError('DEVICE KEY REQUIRED')
@@ -119,7 +129,17 @@ class QaimeCreateSerializer(ModelSerializer):
                 raise ValidationError('ACCESSORY KEY REQUIRED')
             q_d_device=q_d['device']
             q_d_accessory=q_d['accessory']
+            if(q_d_device!=None and q_d_accessory!=None):
+                raise ValidationError('IN THE SAME TIME YOU CAN NOT CHOOSE DEIVCE AND ACCESSORY')
             if(q_d_device!=None):
+                qaime_pendings=Qaime.objects.filter(status=STATIC_STATUS_PENDING).all()
+                if(qaime_pendings!=None):
+                    for qm_pn in qaime_pendings:
+                        qaime_pending_details=QaimeDetail.objects.filter(qaime=qm_pn)
+                        for qm_pn_details in qaime_pending_details:
+                            if(qm_pn_details.device==q_d_device):
+                                raise ValidationError('THE DEVICE HAS BEEN USED IN QAIME WITH STATUS PENDING. PLEASE COMPLETE THIS QAIME: '+qm_pn.name)
+
                 if('simcard' not in q_d):
                     raise ValidationError('SIMCARD KEY REQUIRED')
                 if('configuration' not in q_d):
@@ -147,7 +167,22 @@ class QaimeCreateSerializer(ModelSerializer):
                         simcard_list.append(q_d_simcard.id)
                 
             if(q_d_accessory!=None):
-                if(q_d_accessory.count==0):
+                is_accessory_exist=Accessory.objects.filter(accessory_model=q_d_accessory.accessory_model,
+                accessory_type=q_d_accessory.accessory_type,is_our=q_d_accessory.is_our,
+                manufacturer=q_d_accessory.manufacturer,is_new=q_d['is_new']).first()
+
+                if(is_accessory_exist==None):
+                    raise ValidationError('THIS KIND OF ACCESSORY DOES NOT EXIST.PLEASE CHECK "IS NEW"')
+
+                qaime_pendings=Qaime.objects.filter(status=STATIC_STATUS_PENDING).all()
+                if(qaime_pendings!=None):
+                    for qm_pn in qaime_pendings:
+                        qaime_pending_details=QaimeDetail.objects.filter(qaime=qm_pn)
+                        for qm_pn_details in qaime_pending_details:
+                            if(qm_pn_details.accessory==is_accessory_exist and qm_pn_details.company==q_d['company'] and qm_pn_details.project==q_d['project']):
+                                raise ValidationError('THE ACCESSORY(WITH SAME COMPANY AND PROJECT) HAS BEEN USED IN QAIME WITH STATUS PENDING. PLEASE COMPLETE THIS QAIME: '+qm_pn.name)
+
+                if(is_accessory_exist.count==0):
                     raise ValidationError('ACCESSORY COUNT IS NOT ENOUGH')
 
                 
@@ -155,14 +190,14 @@ class QaimeCreateSerializer(ModelSerializer):
         return attrs
 
     def create(self, validated_data): 
-        # print("VALI DATA____________________")
-        # print(validated_data)
-        # print("VALI DATA____________________")
+        print("VALI DATA____________________")
+        print(validated_data)
+        print("VALI DATA____________________")
         qaime_details=validated_data.get('qaime_details')
         popped_qaime_details = validated_data.pop('qaime_details')
         qaime=Qaime.objects.create(**validated_data)
  
-        if(qaime.qaime_type==STATIC_QAIME_TYPE_SELLING):
+        if(qaime.qaime_type_id==STATIC_QAIME_TYPE_SELLING):
             #This is for selling qaime type
             for q_d in qaime_details:
                 q_d['qaime']=qaime
@@ -310,14 +345,25 @@ class QaimeCreateSerializer(ModelSerializer):
                             event_datetime=qaime.qaime_datetime
                         )
 
+                accessory=None
                 if(q_d['accessory']!=None):
                     # 2.QaimeDetail for accessories
-                    accessory=q_d['accessory']
+                    accessory=Accessory.objects.filter(accessory_model=q_d['accessory'].accessory_model,
+                        accessory_type=q_d['accessory'].accessory_type,is_our=q_d['accessory'].is_our,
+                        manufacturer=q_d['accessory'].manufacturer,is_new=q_d['is_new']).first()
                     accessory.count=accessory.count-q_d['count']
                     accessory.save()
 
+                    AccessoryHistory.objects.create(
+                        accessory=accessory,
+                        add_count=-q_d['count'],
+                        qaime=qaime,
+                        entry_warehouse_date=qaime.qaime_datetime,
+                        status_id=STATIC_STATUS_SELL
+                    )
+
                 Pending.objects.create(
-                            accessory=q_d['accessory'],
+                            accessory=accessory,
                             device=q_d['device'],
                             count=q_d['count'],
                             recipient=qaime.recipient,
@@ -360,7 +406,7 @@ class QaimeCreateReturnSerializer(ModelSerializer):
     #         "company":"Integer",
     #         "configuration":"Integer|null",
     #         "fw_version":"Integer|null",
-    #         "sold_or_rent":"Integer",
+    #         "sold_or_rent":"Boolean",
     #         },
     
     #         For accessory
@@ -370,7 +416,7 @@ class QaimeCreateReturnSerializer(ModelSerializer):
     #         "project":"Integer",
     #         "company":"Integer",
     #         "count":"Integer",
-    #         "is_new":"Integer",
+    #         "is_new":"Boolean",
     #         }
     #     ]
     # }
@@ -381,11 +427,11 @@ class QaimeCreateReturnSerializer(ModelSerializer):
                 'id','name','responsible_person','recipient','qaime_type','status',
                 'qaime_datetime','comment','qaime_details'
                 ]
-    
+
     def validate(self, attrs):
         qaime_details=attrs['qaime_details']
         device_list=[]
-        print(qaime_details)
+        # print(qaime_details)
         for q_d in qaime_details:
             if('device' not in q_d):
                 raise ValidationError('DEVICE KEY REQUIRED')
@@ -394,6 +440,14 @@ class QaimeCreateReturnSerializer(ModelSerializer):
             q_d_device=q_d['device']
             q_d_accessory=q_d['accessory']
             if(q_d_device!=None):
+                qaime_pendings=Qaime.objects.filter(status=STATIC_STATUS_PENDING).all()
+                if(qaime_pendings!=None):
+                    for qm_pn in qaime_pendings:
+                        qaime_pending_details=QaimeDetail.objects.filter(qaime=qm_pn)
+                        for qm_pn_details in qaime_pending_details:
+                            if(qm_pn_details.device==q_d_device):
+                                raise ValidationError('THE DEVICE HAS BEEN USED IN QAIME WITH STATUS PENDING. PLEASE COMPLETE THIS QAIME: '+qm_pn.name)
+                
                 if(q_d_device.status_id==STATIC_STATUS_READY_TO_SELL):
                     raise ValidationError('THE DEVICE HAS NOT BEEN SOLD YET')
                 if(q_d_device.id in device_list):
@@ -401,7 +455,21 @@ class QaimeCreateReturnSerializer(ModelSerializer):
                 else:
                     device_list.append(q_d_device.id)  
             if(q_d_accessory!=None):
-                accessory=q_d['accessory']
+                is_accessory_exist=Accessory.objects.filter(accessory_model=q_d_accessory.accessory_model,
+                accessory_type=q_d_accessory.accessory_type,is_our=q_d_accessory.is_our,
+                manufacturer=q_d_accessory.manufacturer,is_new=q_d['is_new']).first()
+                if(is_accessory_exist==None):
+                    raise ValidationError('THIS KIND OF ACCESSORY DOES NOT EXIST.PLEASE CHECK "IS NEW"')
+
+                accessory=is_accessory_exist
+                qaime_pendings=Qaime.objects.filter(status=STATIC_STATUS_PENDING).all()
+                if(qaime_pendings!=None):
+                    for qm_pn in qaime_pendings:
+                        qaime_pending_details=QaimeDetail.objects.filter(qaime=qm_pn)
+                        for qm_pn_details in qaime_pending_details:
+                            if(qm_pn_details.accessory==accessory and qm_pn_details.company==q_d['company'] and qm_pn_details.project==q_d['project']):
+                                raise ValidationError('THE ACCESSORY(WITH SAME COMPANY AND PROJECT) HAS BEEN USED IN QAIME WITH STATUS PENDING. PLEASE COMPLETE THIS QAIME: '+qm_pn.name)
+
                 if(accessory.is_new==True):
                     accessory_pending=Pending.objects.filter(
                                 accessory=accessory,
@@ -423,7 +491,7 @@ class QaimeCreateReturnSerializer(ModelSerializer):
         popped_qaime_details = validated_data.pop('qaime_details')
         qaime=Qaime.objects.create(**validated_data)
  
-        if(qaime.qaime_type==STATIC_QAIME_TYPE_RETURN):
+        if(qaime.qaime_type_id==STATIC_QAIME_TYPE_RETURN):
             #This is for returning qaime type
             for q_d in qaime_details:
                 q_d['qaime']=qaime
@@ -471,7 +539,7 @@ class QaimeCreateReturnSerializer(ModelSerializer):
                     device.recipient=qaime.recipient
                     device.device_location_id=STATIC_DEVICE_LOCATION_AT_APLUSA_SECURITY_WAREHOUSE
 
-                    if(q_d['sold_or_rent']==1):
+                    if(q_d['sold_or_rent']==True):
                         device.is_sold=0
                     else:
                         device.is_rent=0                
@@ -522,7 +590,7 @@ class QaimeCreateReturnSerializer(ModelSerializer):
                         event_datetime=qaime.qaime_datetime
                     )
 
-                    if(q_d['sold_or_rent']==1):
+                    if(q_d['sold_or_rent']==True):
                         Event.objects.create(
                         action_id=STATIC_ACTION_QAIME_RETURN,
                         event_type_id=STATIC_EVENT_TYPE_IS_SOLD_CHANGED,
@@ -567,18 +635,29 @@ class QaimeCreateReturnSerializer(ModelSerializer):
                             event_datetime=qaime.qaime_datetime
                         )
 
+                accessory=None
                 if(q_d['accessory']!=None):
                     # 2.QaimeDetail for accessories
-                    accessory=q_d['accessory']
+                    accessory=Accessory.objects.filter(accessory_model=q_d['accessory'].accessory_model,
+                        accessory_type=q_d['accessory'].accessory_type,is_our=q_d['accessory'].is_our,
+                        manufacturer=q_d['accessory'].manufacturer,is_new=q_d['is_new']).first()
                     accessory.count=accessory.count+q_d['count']
                     accessory.save()
+
+                    AccessoryHistory.objects.create(
+                        accessory=accessory,
+                        add_count=q_d['count'],
+                        qaime=qaime,
+                        entry_warehouse_date=qaime.qaime_datetime,
+                        status_id=STATIC_STATUS_REFUND
+                    )
 
                     # There is 2 option:
                     # 1.If accessory not installed yet(if accessory is_new=True), then we have to delete Pending data
                     # 2.If accessory already installed(if accessory is_new=False),then we have NOT delete Pending data
                     if(accessory.is_new==True):
                         accessory_pending=Pending.objects.filter(
-                                accessory=q_d['accessory'],
+                                accessory=accessory,
                                 project=q_d['project'],
                                 company=q_d['company'],
                                 status_id=STATIC_STATUS_PENDING
@@ -601,13 +680,12 @@ class QaimeCreateReturnSerializer(ModelSerializer):
         serializer = QaimeListSerializer(instance)
         return serializer.data
 
-
-
 class QaimeDetailSerializer(ModelSerializer): 
         responsible_person_detail=SerializerMethodField()
         recipient_detail=SerializerMethodField()
         status_detail=SerializerMethodField()
         qaime_details_detail=SerializerMethodField()
+        qaime_type_detail=SerializerMethodField()
         class Meta:
             model=Qaime
             fields=[
@@ -621,6 +699,7 @@ class QaimeDetailSerializer(ModelSerializer):
                 'status',
                 'status_detail',
                 'qaime_type',
+                'qaime_type_detail',
                 'is_formal',
                 'qaime_datetime',
                 'comment',
@@ -635,3 +714,5 @@ class QaimeDetailSerializer(ModelSerializer):
             return QaimeDetailListSerializer(QaimeDetail.objects.filter(qaime=obj), many=True).data
         def get_status_detail(self,obj):
             return StatusSerializer(obj.status).data
+        def get_qaime_type_detail(self,obj):
+            return QaimeTypeSerializer(obj.qaime_type).data

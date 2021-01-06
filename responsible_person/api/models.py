@@ -16,6 +16,7 @@ class ResponsiblePerson(models.Model):
     created_at = models.DateTimeField(editable=False)
     updated_at = models.DateTimeField(editable=False)
     deleted_at = models.DateTimeField(editable=False)
+    name = models.CharField(max_length=150, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -27,6 +28,7 @@ class ResponsiblePerson(models.Model):
         if not self.id:
             self.created_at=timezone.now()
         self.updated_at=timezone.now()
+        self.name=self.department.name
         return super(ResponsiblePerson, self).save( *args,**kwargs)
 
     def __str__(self):

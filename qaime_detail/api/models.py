@@ -20,8 +20,8 @@ class QaimeDetail(models.Model):
     configuration = models.ForeignKey(Configuration, models.DO_NOTHING, blank=False, null=True)
     fw_version = models.ForeignKey(FWVersion, models.DO_NOTHING, blank=False, null=True)
     count = models.BigIntegerField(default=1, blank=True, null=False)
-    is_new = models.IntegerField(blank=False, null=False,default=1)
-    sold_or_rent = models.IntegerField(blank=False, null=False,default=1)
+    is_new = models.BooleanField(blank=False, null=False,default=True)
+    sold_or_rent = models.BooleanField(blank=False, null=False,default=True)
     created_at = models.DateTimeField(editable=False)
     updated_at = models.DateTimeField(editable=False)
 
