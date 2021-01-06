@@ -13,7 +13,7 @@ from django_filters import rest_framework as filter
 class AccessoryHistoryListCreateAPIView(ListCreateAPIView):
     permission_classes = (CustomDjangoModelPermissions, )
     queryset = AccessoryHistory.objects.all().order_by('id')
-    serializer_class=AccessoryHistorySerializer
+    serializer_class = AccessoryHistorySerializer
     filter_class = AccessoryHistoryFilter
     filter_backends = (filter.DjangoFilterBackend, filters.OrderingFilter)
     ordering_fields = '__all__'

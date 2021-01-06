@@ -13,9 +13,11 @@ class AccessoryHistoryFilter(filter.FilterSet):
     accessory = NumberInFilter(field_name='accessory',lookup_expr='in')
     add_count = NumberInFilter(field_name='add_count', lookup_expr='in')
     rated_price = NumberInFilter(field_name='rated_price',lookup_expr='in')
+    qaime = NumberInFilter(field_name='qaime',lookup_expr='in')
+    status = NumberInFilter(field_name='status',lookup_expr='in')
     entry_warehouse_date = DateListFilter(field_name='entry_warehouse_date',lookup_expr='in')
     class Meta:
         model = AccessoryHistory
-        fields = ['rated_price','id','add_count','accessory','entry_warehouse_date']
+        fields = ['rated_price','id','add_count','accessory','qaime','status','entry_warehouse_date']
 
 
