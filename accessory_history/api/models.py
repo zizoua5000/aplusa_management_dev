@@ -10,8 +10,6 @@ class AccessoryHistory(models.Model):
     add_count = models.BigIntegerField(blank=True, null=True)
     rated_price = models.FloatField(blank=True, null=True)
     entry_warehouse_date = models.DateTimeField(null=True, blank=True)
-    qaime = models.ForeignKey(Qaime, models.DO_NOTHING, blank=True, null=True)
-    status = models.ForeignKey(Status, models.DO_NOTHING, blank=True, null=True)
     created_at = models.DateTimeField(editable=False)
     qaime = models.ForeignKey(Qaime, models.DO_NOTHING, blank=True, null=True)
     status = models.ForeignKey(Status, models.DO_NOTHING, blank=True, null=True)
@@ -19,7 +17,7 @@ class AccessoryHistory(models.Model):
     class Meta:
         managed = False
         db_table = 'accessory_history'
-
+        
     def save(self, *args,**kwargs):
         if not self.id:
             self.created_at=timezone.now()

@@ -6,13 +6,13 @@ from accessory_model.api.models import AccessoryModel
 from accessory_type.api.models import AccessoryType
 
 class Accessory(models.Model):
-    name = models.CharField(unique=True,max_length=50, blank=False, null=False)
+    name = models.CharField(max_length=50, blank=False, null=False)
     accessory_model = models.ForeignKey(AccessoryModel, models.DO_NOTHING, blank=True, null=True)
     accessory_type = models.ForeignKey(AccessoryType, models.DO_NOTHING, blank=True, null=True)
     manufacturer = models.ForeignKey(Company, models.DO_NOTHING, blank=True, null=True)
     is_new = models.BooleanField(default=True, blank=True, null=True)
     is_our = models.BooleanField(default=True, blank=False, null=False)
-    count = models.BigIntegerField(default=0, blank=True, null=True)
+    count = models.BigIntegerField(blank=True, null=True)
     created_at = models.DateTimeField(editable=False)
     updated_at = models.DateTimeField(editable=False)
     deleted_at = models.DateTimeField(editable=False)
@@ -20,6 +20,7 @@ class Accessory(models.Model):
     class Meta:
         managed = False
         db_table = 'accessory'
+        
 
     def save(self, *args,**kwargs):
         if not self.id:
